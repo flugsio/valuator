@@ -11,16 +11,18 @@ impl Cluster {
     pub fn print(&self) {
         let kinds = Cluster::unique_kinds(&self);
 
-        print!("{:>15} |", "");
+        print!("{:>18} |", "");
         for kind in kinds.clone() {
-            print!("{:>12} |", kind.name());
+            print!(" {} |", kind.name());
         };
         println!("");
 
         for structure in &self.structures {
-            print!("{:>15} |", structure.name);
+            print!("{:>18} |", structure.name);
             for kind in kinds.clone() {
-                print!("{:>12} |", structure.amount_for(kind));
+                print!("{:>width$} |",
+                       structure.amount_for(kind.clone()),
+                       width = kind.name().len() + 1);
             };
             println!("");
         };
