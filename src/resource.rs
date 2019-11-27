@@ -4,11 +4,11 @@ use crate::kind::Kind;
 #[derive(Clone)]
 pub struct Resource {
     pub kind: Kind,
-    pub amount: i64,
+    pub amount: f64,
 }
 
 impl Resource {
-    pub fn new(kind: Kind, amount: i64) -> Resource {
+    pub fn new(kind: Kind, amount: f64) -> Resource {
         Resource {
             kind: kind,
             amount: amount,

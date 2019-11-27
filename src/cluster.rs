@@ -28,7 +28,7 @@ impl Cluster {
         };
     }
 
-    pub fn add_structure(&mut self, name: &str, resources: Vec<(Kind, i64)>) {
+    pub fn add_structure(&mut self, name: &str, resources: Vec<(Kind, f64)>) {
         self.structures.push(Structure::new(name, resources));
     }
 

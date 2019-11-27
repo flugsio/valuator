@@ -8,7 +8,7 @@ pub struct Structure {
 }
 
 impl Structure {
-    pub fn new(name: &str, resources: Vec<(Kind, i64)>) -> Structure {
+    pub fn new(name: &str, resources: Vec<(Kind, f64)>) -> Structure {
         Structure {
             name: name.to_string(),
             resources: resources.iter().map(
@@ -16,7 +16,7 @@ impl Structure {
                 ).collect(),
         }
     }
-    pub fn amount_for(&self, kind: Kind) -> i64 {
-        self.resources.iter().find(|r| r.kind == kind).map(|r| r.amount).unwrap_or(0)
+    pub fn amount_for(&self, kind: Kind) -> f64 {
+        self.resources.iter().find(|r| r.kind == kind).map(|r| r.amount).unwrap_or(0.0)
     }
 }
