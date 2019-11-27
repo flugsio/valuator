@@ -1,9 +1,10 @@
 use std::collections::BTreeSet;
 use crate::kind::Kind;
+use crate::structure::Structure;
 
 pub struct Cluster {
     pub name: String,
-    pub structures: Vec<super::structure::Structure>,
+    pub structures: Vec<Structure>,
 }
 
 impl Cluster {
@@ -23,6 +24,10 @@ impl Cluster {
             };
             println!("");
         };
+    }
+
+    pub fn add_structure(&mut self, name: &str, resources: Vec<(Kind, i64)>) {
+        self.structures.push(Structure::new(name, resources));
     }
 
     pub fn unique_kinds(&self) -> BTreeSet<Kind> {

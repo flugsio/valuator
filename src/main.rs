@@ -14,26 +14,43 @@ fn main() {
         name: "Available".to_string(),
         structures: Vec::new(),
     };
-    available.structures.push(Structure { name: "Sprinkler".to_string(),
-        resources: vec![
-            Resource::new(Kind::Electricity, -2),
-            Resource::new(Kind::Water, -1),
-            Resource::new(Kind::GroundWater, 1),
-        ],
-    });
-    available.structures.push(Structure { name: "Water Tower".to_string(),
-        resources: vec![
-            Resource::new(Kind::Money, -2),
-            Resource::new(Kind::Water, 8),
-        ],
-    });
-    available.structures.push(Structure { name: "Soil".to_string(),
-        resources: vec![
-            Resource::new_optional(Kind::OrganicWaste, -1),
-            Resource::new(Kind::GroundWater, 1),
-            Resource::new(Kind::Fertilizer, 1),
-        ],
-    });
+    available.add_structure(
+        "Sprinklers", vec![
+        (Kind::Electricity, -2),
+        (Kind::Water, -1),
+        (Kind::GroundWater, 1),
+        ]);
+    available.add_structure(
+        "Water Tower", vec![
+        (Kind::Money, -2),
+        (Kind::Water, 8),
+        ]);
+    available.add_structure(
+        "Soil", vec![
+        (Kind::GroundWater, 1),
+        (Kind::Fertilizer, 1),
+        ]);
+    available.add_structure(
+        "Soil+", vec![
+        (Kind::OrganicWaste, -1),
+        (Kind::GroundWater, 1),
+        (Kind::Fertilizer, 1),
+        ]);
+    // Algae Farm
+    // Anaerobic Digestor
+    // Water Tower
+    // Water Well
+    // Corn Field
+    // Grain Silo
+    // Ethanol Distillery
+    // Ethanol Generator
+    // Community Center
+    // Plaza
+    // Solar Tree
+    // Beech Tree Grove
+    // Elm Trees
+    // Ash Tree
+    // Shack I
     println!("Available structures:");
     available.print();
 }
