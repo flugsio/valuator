@@ -87,7 +87,7 @@ fn main() {
         "Ethanol Distillery", vec![
         (Kind::Corn, -6.0),
         (Kind::Water, -4.0),
-        (Kind::Electricity, 2.0),
+        (Kind::Electricity, -2.0),
         (Kind::Ethanol, 8.0),
         (Kind::OrganicWaste, 4.0),
         ]);

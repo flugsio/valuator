@@ -26,6 +26,13 @@ impl Cluster {
             };
             println!("");
         };
+
+        print!("    {:>20} |", "Total");
+        for kind in kinds.clone() {
+            let total: f64 = (&self.structures).iter().map(|s| s.amount_for(kind.clone())).collect::<Vec<f64>>().iter().sum();
+            print!("{:>width$} |", total, width = kind.name().len() + 1);
+        };
+        println!("");
     }
 
     // returns a new cluster set of structures by filtering on search term
