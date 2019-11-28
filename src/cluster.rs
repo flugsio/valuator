@@ -32,7 +32,7 @@ impl Cluster {
     pub fn search(&self, search: &str) -> Cluster {
         let mut structures = Vec::new();
         for structure in &self.structures {
-            if structure.searchable_content().contains(search) {
+            if structure.searchable_content().contains(&search.to_lowercase()) {
                 structures.push(structure.clone());
             }
         }
