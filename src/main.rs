@@ -1,3 +1,4 @@
+use std::io;
 
 mod cluster;
 mod structure;
@@ -10,6 +11,10 @@ use kind::Kind;
 fn main() {
     let mut available = Cluster {
         name: "Available".to_string(),
+        structures: Vec::new(),
+    };
+    let mut selected = Cluster {
+        name: "Selected".to_string(),
         structures: Vec::new(),
     };
     available.add_structure(
@@ -160,4 +165,41 @@ fn main() {
         ]);
     println!("Available structures:");
     available.print();
+    let mut current = &available;
+    let mut search = Cluster { name: "asdf".to_string(), structures: Vec::new() };
+    loop {
+        println!("Selected structures:");
+        selected.print();
+
+        println!("Number to add structure, -Number to remove, text to search");
+        let s = &mut String::new();
+        // TODO: trim earlier
+        io::stdin().read_line(s).unwrap();
+        match s.trim().parse::<isize>() { 
+            Ok(i) if i > 0=> {
+                let i = (i - 1) as usize;
+                if current.structures.len() > i {
+                    selected.structures.push(current.structures[i].clone());
+                }
+            },
+            Ok(i) if i < 0 => {
+                let i = (i * -1 - 1) as usize;
+                if selected.structures.len() > i {
+                    selected.structures.remove(i);
+                }
+            },
+            Ok(_) => { },
+            Err(_) => {
+                if s.trim() == "" {
+                    current = &available;
+                } else {
+                    search = available.search(s.trim());
+                    current = &search;
+                }
+                println!("Search structures:");
+                current.print();
+            }
+        };
+
+    }
 }

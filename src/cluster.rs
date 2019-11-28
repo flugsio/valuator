@@ -11,14 +11,14 @@ impl Cluster {
     pub fn print(&self) {
         let kinds = Cluster::unique_kinds(&self);
 
-        print!("{:>18} |", "");
+        print!("    {:>20} |", "");
         for kind in kinds.clone() {
             print!(" {} |", kind.name());
         };
         println!("");
 
-        for structure in &self.structures {
-            print!("{:>18} |", structure.name);
+        for (i, structure) in (&self.structures).iter().enumerate() {
+            print!("{:>3} {:>20} |", i + 1, structure.name);
             for kind in kinds.clone() {
                 print!("{:>width$} |",
                        structure.amount_for(kind.clone()),
@@ -26,6 +26,20 @@ impl Cluster {
             };
             println!("");
         };
+    }
+
+    // returns a new cluster set of structures by filtering on search term
+    pub fn search(&self, search: &str) -> Cluster {
+        let mut structures = Vec::new();
+        for structure in &self.structures {
+            if structure.searchable_content().contains(search) {
+                structures.push(structure.clone());
+            }
+        }
+        Cluster {
+            name: search.to_string(),
+            structures: structures,
+        }
     }
 
     pub fn add_structure(&mut self, name: &str, resources: Vec<(Kind, f64)>) {
