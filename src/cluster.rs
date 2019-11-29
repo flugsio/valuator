@@ -11,14 +11,14 @@ impl Cluster {
     pub fn print(&self) {
         let kinds = Cluster::unique_kinds(&self);
 
-        print!("    {:>20} |", "");
+        print!("    {:>23} |", "");
         for kind in kinds.clone() {
             print!(" {} |", kind.name());
         };
         println!("");
 
         for (i, structure) in (&self.structures).iter().enumerate() {
-            print!("{:>3} {:>20} |", i + 1, structure.name);
+            print!("{:>3} {:>23} |", i + 1, structure.name);
             for kind in kinds.clone() {
                 print!("{:>width$} |",
                        structure.amount_for(kind.clone()),
@@ -27,7 +27,7 @@ impl Cluster {
             println!("");
         };
 
-        print!("    {:>20} |", "Total");
+        print!("    {:>23} |", "Total");
         for kind in kinds.clone() {
             let total: f64 = (&self.structures).iter().map(|s| s.amount_for(kind.clone())).collect::<Vec<f64>>().iter().sum();
             print!("{:>width$} |", total, width = kind.name().len() + 1);
